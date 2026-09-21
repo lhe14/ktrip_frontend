@@ -268,12 +268,12 @@ export default function CreatePost() {
                     }}
                   />
                   {region && placeResults.length > 0 && (
-                    <div className="create-types">
+                    <div className="create-place-results">
                       {placeResults.map((p) => (
                         <button
                           key={p.id}
                           type="button"
-                          className={`pill ${String(placeId) === String(p.id) ? 'is-active' : ''}`}
+                          className={`pill create-place-option ${String(placeId) === String(p.id) ? 'is-active' : ''}`}
                           onClick={() => selectPlace(p)}
                         >
                           {p.title}
@@ -322,7 +322,7 @@ export default function CreatePost() {
                           <button
                             key={p.id}
                             type="button"
-                            className={`pill ${String(placeId) === String(p.id) ? 'is-active' : ''}`}
+                            className={`pill create-place-option ${String(placeId) === String(p.id) ? 'is-active' : ''}`}
                             onClick={() => selectPlace(p)}
                           >
                             {p.title}

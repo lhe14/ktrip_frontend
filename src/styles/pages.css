@@ -1592,6 +1592,23 @@
   overflow-y: auto;
 }
 
+/* Place search results — capped so a long match list scrolls in place
+   instead of pushing the rest of the form down indefinitely. */
+.create-place-results {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: flex-start;
+  gap: var(--s-3);
+  max-height: 190px;
+  overflow-y: auto;
+}
+
+/* Place/YOUR TRIP option buttons — same pill styling, just squared off to
+   match the search input's rounded-rect corners instead of a full oval. */
+.create-place-option {
+  border-radius: 12px;
+}
+
 /* Date range field (COMPANION travel dates) */
 
 .date-range-field {
