@@ -1526,7 +1526,10 @@
 
 .create-place-body {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  /* minmax(0, Nfr), not a bare Nfr — otherwise a long place name's min-content
+     width forces a track wider than its fr share, so the box's width shifts
+     depending on which day/results are currently showing. */
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
   gap: var(--s-5);
 }
 
@@ -1539,11 +1542,16 @@
 
 /* Shared content box under the Place / YOUR TRIP titles — identical on both
    sides so the two columns read as one matching layout, tops aligned since
-   each title + box sits in the same grid row with the same gap above it. */
+   each title + box sits in the same grid row with the same gap above it.
+   Height is fixed (not just padding-driven) so the two boxes' bottoms line
+   up too, regardless of their header rows (search input vs. day nav) being
+   different heights — the scrollable list inside each stretches to fill
+   whatever's left via flex:1 on .create-place-results/-trip-list. */
 .create-place-box {
   display: flex;
   flex-direction: column;
   gap: var(--s-3);
+  height: 280px;
   padding: var(--s-4);
   border: 1px solid var(--line);
   border-radius: 12px;
@@ -1588,18 +1596,22 @@
   flex-wrap: wrap;
   align-content: flex-start;
   gap: var(--s-2);
-  max-height: 160px;
+  flex: 1;
+  min-height: 0;
   overflow-y: auto;
 }
 
-/* Place search results — capped so a long match list scrolls in place
-   instead of pushing the rest of the form down indefinitely. */
+/* Place search results — fills the rest of the fixed-height box and
+   scrolls in place instead of pushing the rest of the form down
+   indefinitely (flex:1 + min-height:0, not a hardcoded max-height, so it
+   stays in sync with .create-place-box's own height). */
 .create-place-results {
   display: flex;
   flex-wrap: wrap;
   align-content: flex-start;
   gap: var(--s-3);
-  max-height: 190px;
+  flex: 1;
+  min-height: 0;
   overflow-y: auto;
 }
 
